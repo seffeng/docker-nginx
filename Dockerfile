@@ -2,17 +2,17 @@ FROM    seffeng/alpine
 
 MAINTAINER  seffeng "seffeng@sina.cn"
 
-ENV     VERSION 1.16.1
-ENV     BASE_DIR /opt/websrv
-ENV     CONFIG_DIR ${BASE_DIR}/config
-ENV     PROGRAM_DIR ${BASE_DIR}/program
-ENV     INSTALL_DIR ${BASE_DIR}/nginx
-ENV     EXTEND "gcc g++ make bzip2 perl openssl-dev"
-ENV     WWWROOT ${BASE_DIR}/data/wwwroot
-ENV     PCRE_VERSION "pcre-8.43"
-ENV     ZLIB_VERSION "zlib-1.2.11"
+ARG BASE_DIR="/opt/websrv"
 
-ENV     CONFIGURE="./configure\
+ENV VERSION=1.16.1\
+ PCRE_VERSION="pcre-8.43"\
+ ZLIB_VERSION="zlib-1.2.11"\
+ CONFIG_DIR="${BASE_DIR}/config"\
+ INSTALL_DIR=${BASE_DIR}/program/nginx\
+ EXTEND="gcc g++ make bzip2 perl openssl-dev"\
+ WWWROOT_DIR="${BASE_DIR}/data/wwwroot"
+ 
+ARG CONFIGURE="./configure\
  --conf-path=${CONFIG_DIR}/nginx/nginx.conf\
  --error-log-path=${CONFIG_DIR}/nginx/logs/error.log\
  --group=wwww\
@@ -20,7 +20,7 @@ ENV     CONFIGURE="./configure\
  --lock-path=${CONFIG_DIR}/nginx/logs/lock.txt\
  --pid-path=${CONFIG_DIR}/nginx/logs/pid.txt\
  --prefix=${INSTALL_DIR}\
- --sbin-path=${PROGRAM_DIR}/nginx/sbin/nginx\
+ --sbin-path=${INSTALL_DIR}/sbin/nginx\
  --user=www\
  --with-http_addition_module\
  --with-http_dav_module\
@@ -39,27 +39,26 @@ ENV     CONFIGURE="./configure\
  --with-pcre=/tmp/${PCRE_VERSION}\
  --with-stream_realip_module\
  --with-stream_ssl_module\
- --with-zlib=/tmp/${ZLIB_VERSION}\
-"
+ --with-zlib=/tmp/${ZLIB_VERSION}"
+
 WORKDIR /tmp
-ADD     nginx-${VERSION}.tar.gz ./
-ADD     ${PCRE_VERSION}.tar.gz ./
-ADD     ${ZLIB_VERSION}.tar.gz ./
+ADD nginx-${VERSION}.tar.gz ./
+ADD ${PCRE_VERSION}.tar.gz ./
+ADD ${ZLIB_VERSION}.tar.gz ./
 COPY    conf ./conf
 
-RUN \
- mkdir -p ${WWWROOT} ${BASE_DIR}/logs ${CONFIG_DIR}/nginx/certs.d &&\
+RUN apk update && apk add ${EXTEND} &&\
+ mkdir -p ${WWWROOT_DIR} ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/nginx/certs.d &&\
  addgroup wwww && adduser -H -D -G wwww www &&\
- apk update && apk add ${EXTEND} &&\
  cd nginx-${VERSION} &&\
  ${CONFIGURE} &&\
  make && make install &&\
- ln -s ${PROGRAM_DIR}/nginx/sbin/nginx /usr/bin/nginx &&\
+ ln -s ${INSTALL_DIR}/sbin/nginx /usr/bin/nginx &&\
  cp -Rf /tmp/conf/* ${CONFIG_DIR}/nginx &&\
  apk del ${EXTEND} &&\
  rm -rf /tmp/*
 
-VOLUME ["/opt/websrv/config/nginx/conf.d", "/opt/websrv/config/nginx/certs.d", "/opt/websrv/logs", "/opt/websrv/data/wwwroot"]
+VOLUME ["${CONFIG_DIR}/nginx/conf.d", "${CONFIG_DIR}/nginx/certs.d", "${BASE_DIR}/logs", "${WWWROOT_DIR}", "${BASE_DIR}/tmp"]
 
 EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]

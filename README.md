@@ -7,7 +7,7 @@
 $ docker pull seffeng/nginx
 
 # 运行
-$ docker run --name nginx-test -d -p 80:80 -v <html-dir>:/opt/websrv/data/wwwroot -v <conf-dir>:/opt/websrv/config/nginx/conf.d -v <cert-dir>:/opt/websrv/config/nginx/certs.d -v <log-dir>:/opt/websrv/logs seffeng/nginx
+$ docker run --name nginx-test -d -p 80:80 -p 443:443 -v <html-dir>:/opt/websrv/data/wwwroot -v <conf-dir>:/opt/websrv/config/nginx/conf.d -v <cert-dir>:/opt/websrv/config/nginx/certs.d -v <log-dir>:/opt/websrv/logs <tmp-dir>:/opt/websrv/tmp seffeng/nginx
 
 # 查看正在运行的容器
 $ docker ps
