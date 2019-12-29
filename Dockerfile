@@ -9,7 +9,7 @@ ENV VERSION=1.16.1\
  ZLIB_VERSION="zlib-1.2.11"\
  CONFIG_DIR="${BASE_DIR}/config"\
  INSTALL_DIR=${BASE_DIR}/program/nginx\
- EXTEND="gcc g++ make bzip2 perl openssl-dev"\
+ EXTEND="gcc g++ make bzip2 perl openssl-dev file"\
  WWWROOT_DIR="${BASE_DIR}/data/wwwroot"
  
 ARG CONFIGURE="./configure\
@@ -56,6 +56,7 @@ RUN apk update && apk add ${EXTEND} &&\
  ln -s ${INSTALL_DIR}/sbin/nginx /usr/bin/nginx &&\
  cp -Rf /tmp/conf/* ${CONFIG_DIR}/nginx &&\
  apk del ${EXTEND} &&\
+ rm -rf /var/cache/apk/* &&\
  rm -rf /tmp/*
 
 VOLUME ["${CONFIG_DIR}/nginx/conf.d", "${CONFIG_DIR}/nginx/certs.d", "${BASE_DIR}/logs", "${WWWROOT_DIR}", "${BASE_DIR}/tmp"]
