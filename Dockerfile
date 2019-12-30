@@ -4,15 +4,18 @@ MAINTAINER  seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
 
-ENV VERSION=1.16.1\
+ENV NGINX_VERSION=nginx-1.16.1\
  PCRE_VERSION="pcre-8.43"\
  ZLIB_VERSION="zlib-1.2.11"\
  CONFIG_DIR="${BASE_DIR}/config"\
  INSTALL_DIR=${BASE_DIR}/program/nginx\
  EXTEND="gcc g++ make bzip2 perl openssl-dev file"\
  WWWROOT_DIR="${BASE_DIR}/data/wwwroot"
- 
-ARG CONFIGURE="./configure\
+
+ENV NGINX_URL="http://nginx.org/download/${NGINX_VERSION}.tar.gz"\
+ PCRE_URL="https://ftp.pcre.org/pub/pcre/${PCRE_VERSION}.tar.gz"\
+ ZLIB_URL="http://zlib.net/${ZLIB_VERSION}.tar.gz"\
+ CONFIGURE="./configure\
  --conf-path=${CONFIG_DIR}/nginx/nginx.conf\
  --error-log-path=${CONFIG_DIR}/nginx/logs/error.log\
  --group=wwww\
@@ -42,15 +45,18 @@ ARG CONFIGURE="./configure\
  --with-zlib=/tmp/${ZLIB_VERSION}"
 
 WORKDIR /tmp
-ADD nginx-${VERSION}.tar.gz ./
-ADD ${PCRE_VERSION}.tar.gz ./
-ADD ${ZLIB_VERSION}.tar.gz ./
 COPY    conf ./conf
 
 RUN apk update && apk add ${EXTEND} &&\
+ wget ${NGINX_URL} &&\
+ wget ${PCRE_URL} &&\
+ wget ${ZLIB_URL} &&\
+ tar -zxf ${NGINX_VERSION}.tar.gz &&\
+ tar -zxf ${PCRE_VERSION}.tar.gz &&\
+ tar -zxf ${ZLIB_VERSION}.tar.gz &&\
  mkdir -p ${WWWROOT_DIR} ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/nginx/certs.d &&\
  addgroup wwww && adduser -H -D -G wwww www &&\
- cd nginx-${VERSION} &&\
+ cd ${NGINX_VERSION} &&\
  ${CONFIGURE} &&\
  make && make install &&\
  ln -s ${INSTALL_DIR}/sbin/nginx /usr/bin/nginx &&\
