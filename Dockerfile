@@ -1,4 +1,4 @@
-FROM    seffeng/alpine
+FROM    seffeng/alpine:latest
 
 MAINTAINER  seffeng "seffeng@sina.cn"
 
@@ -17,11 +17,11 @@ ENV NGINX_URL="http://nginx.org/download/${NGINX_VERSION}.tar.gz"\
  ZLIB_URL="http://zlib.net/${ZLIB_VERSION}.tar.gz"\
  CONFIGURE="./configure\
  --conf-path=${CONFIG_DIR}/nginx/nginx.conf\
- --error-log-path=${CONFIG_DIR}/nginx/logs/error.log\
+ --error-log-path=${BASE_DIR}/logs/error.log\
  --group=wwww\
- --http-log-path=${CONFIG_DIR}/nginx/logs/access.log\
- --lock-path=${CONFIG_DIR}/nginx/logs/lock.txt\
- --pid-path=${CONFIG_DIR}/nginx/logs/pid.txt\
+ --http-log-path=${BASE_DIR}/logs/access.log\
+ --lock-path=${BASE_DIR}/tmp/nginx.lock\
+ --pid-path=${BASE_DIR}/tmp/nginx.pid\
  --prefix=${INSTALL_DIR}\
  --sbin-path=${INSTALL_DIR}/sbin/nginx\
  --user=www\
