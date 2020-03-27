@@ -53,4 +53,11 @@ access_log: #访问日志，可替换 ip_access 为对应域名或增加域名�
 fastcgi_pass: #配合docker seffeng/php:版本（7.4-unix_php74_fpm, 7.3-unix_php73_fpm, 7.2-unix_php72_fpm, 7.1-unix_php71_fpm）
 
 ```
+```shell
+# 建议容器之间使用网络互通
+## 1、添加网络[已存在则跳过此步骤]
+$ docker network create network-01
 
+## 运行容器增加 --network network-01 --network-alias [name-net-alias]
+$ docker run --name nginx-alias1 --network network-01 --network-alias nginx-alias1 -d -p 80:80 -p 443:443 -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/config/nginx/conf.d:/opt/websrv/config/nginx/conf.d -v /srv/websrv/config/nginx/certs.d:/opt/websrv/config/nginx/certs.d -v /srv/websrv/logs/nginx:/opt/websrv/logs -v /srv/websrv/tmp:/opt/websrv/tmp seffeng/nginx
+```
