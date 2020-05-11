@@ -16,15 +16,15 @@ ENV NGINX_URL="http://nginx.org/download/${NGINX_VERSION}.tar.gz"\
  PCRE_URL="https://ftp.pcre.org/pub/pcre/${PCRE_VERSION}.tar.gz"\
  ZLIB_URL="http://zlib.net/${ZLIB_VERSION}.tar.gz"\
  CONFIGURE="./configure\
+ --user=www\
+ --group=wwww\
+ --prefix=${INSTALL_DIR}\
  --conf-path=${CONFIG_DIR}/nginx/nginx.conf\
  --error-log-path=${BASE_DIR}/logs/error.log\
- --group=wwww\
  --http-log-path=${BASE_DIR}/logs/access.log\
  --lock-path=${BASE_DIR}/tmp/nginx.lock\
  --pid-path=${BASE_DIR}/tmp/nginx.pid\
- --prefix=${INSTALL_DIR}\
  --sbin-path=${INSTALL_DIR}/sbin/nginx\
- --user=www\
  --with-http_addition_module\
  --with-http_dav_module\
  --with-http_degradation_module\

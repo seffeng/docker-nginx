@@ -59,5 +59,5 @@ fastcgi_pass: #配合docker seffeng/php:版本（7.4-unix_php74_fpm, 7.3-unix_ph
 $ docker network create network-01
 
 ## 运行容器增加 --network network-01 --network-alias [name-net-alias]
-$ docker run --name nginx-alias1 --network network-01 --network-alias nginx-alias1 -d -p 80:80 -p 443:443 -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/config/nginx/conf.d:/opt/websrv/config/nginx/conf.d -v /srv/websrv/config/nginx/certs.d:/opt/websrv/config/nginx/certs.d -v /srv/websrv/logs/nginx:/opt/websrv/logs -v /srv/websrv/tmp:/opt/websrv/tmp seffeng/nginx
+$ docker run --name nginx-alias1 --network network-01 --network-alias nginx-net1 -d -p 80:80 -p 443:443 -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/config/nginx/conf.d:/opt/websrv/config/nginx/conf.d -v /srv/websrv/config/nginx/certs.d:/opt/websrv/config/nginx/certs.d -v /srv/websrv/logs/nginx:/opt/websrv/logs -v /srv/websrv/tmp:/opt/websrv/tmp seffeng/nginx
 ```
