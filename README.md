@@ -1,5 +1,10 @@
 # Docker Alpine Nginx
 
+# 版本说明
+
+* [1.18.0](https://github.com/seffeng/docker-nginx) , [latest](https://github.com/seffeng/docker-nginx)
+* [1.16.1](https://github.com/seffeng/docker-nginx/tree/1.16)
+
 ## 环境
 
 ```
