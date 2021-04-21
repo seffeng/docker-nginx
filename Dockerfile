@@ -4,17 +4,17 @@ MAINTAINER  seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
 
-ENV NGINX_VERSION=nginx-1.18.0\
- PCRE_VERSION="pcre-8.43"\
+ENV NGINX_VERSION=nginx-1.20.0\
+ PCRE_VERSION="pcre-8.44"\
  ZLIB_VERSION="zlib-1.2.11"\
  CONFIG_DIR="${BASE_DIR}/config"\
  INSTALL_DIR=${BASE_DIR}/program/nginx\
  EXTEND="gcc g++ make bzip2 perl openssl-dev file"\
  WWWROOT_DIR="${BASE_DIR}/data/wwwroot"
 
-ENV NGINX_URL="http://nginx.org/download/${NGINX_VERSION}.tar.gz"\
+ENV NGINX_URL="https://nginx.org/download/${NGINX_VERSION}.tar.gz"\
  PCRE_URL="https://ftp.pcre.org/pub/pcre/${PCRE_VERSION}.tar.gz"\
- ZLIB_URL="http://zlib.net/${ZLIB_VERSION}.tar.gz"\
+ ZLIB_URL="https://zlib.net/${ZLIB_VERSION}.tar.gz"\
  CONFIGURE="./configure\
  --user=www\
  --group=wwww\

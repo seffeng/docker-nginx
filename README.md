@@ -2,14 +2,15 @@
 
 # 版本说明
 
-* [1.18.0](https://github.com/seffeng/docker-nginx) , [latest](https://github.com/seffeng/docker-nginx)
+* [1.20.0](https://github.com/seffeng/docker-nginx) , [latest](https://github.com/seffeng/docker-nginx)
+* [1.18.0](https://github.com/seffeng/docker-nginx/tree/1.18)
 * [1.16.1](https://github.com/seffeng/docker-nginx/tree/1.16)
 
 ## 环境
 
 ```
-alpine: ^3.11
-nginx: 1.18.0
+alpine: ^3.13
+nginx: 1.20.0
 ```
 
 ## 常用命令：
@@ -22,7 +23,7 @@ $ docker pull seffeng/nginx
 $ docker run --name nginx-test -d -p 80:80 -p 443:443 -v <html-dir>:/opt/websrv/data/wwwroot -v <conf-dir>:/opt/websrv/config/nginx/conf.d -v <cert-dir>:/opt/websrv/config/nginx/certs.d -v <log-dir>:/opt/websrv/logs -v <tmp-dir>:/opt/websrv/tmp seffeng/nginx
 
 # 例子：
-$ docker run --name nginx-alias1 -d -p 80:80 -p 443:443 -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/config/nginx/conf.d:/opt/websrv/config/nginx/conf.d -v /srv/websrv/config/nginx/certs.d:/opt/websrv/config/nginx/certs.d -v /srv/websrv/logs/nginx:/opt/websrv/logs -v /srv/websrv/tmp:/opt/websrv/tmp seffeng/nginx
+$ docker run --name nginx-alias1 -d -p 80:80 -p 443:443 -v /opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /opt/websrv/config/nginx/conf.d:/opt/websrv/config/nginx/conf.d -v /opt/websrv/config/nginx/certs.d:/opt/websrv/config/nginx/certs.d -v /opt/websrv/logs/nginx:/opt/websrv/logs -v /opt/websrv/tmp:/opt/websrv/tmp seffeng/nginx
 
 # 查看正在运行的容器
 $ docker ps
@@ -64,5 +65,5 @@ fastcgi_pass: #配合docker seffeng/php:版本（7.4-unix_php74_fpm, 7.3-unix_ph
 $ docker network create network-01
 
 ## 运行容器增加 --network network-01 --network-alias [name-net-alias]
-$ docker run --name nginx-alias1 --network network-01 --network-alias nginx-net1 -d -p 80:80 -p 443:443 -v /srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /srv/websrv/config/nginx/conf.d:/opt/websrv/config/nginx/conf.d -v /srv/websrv/config/nginx/certs.d:/opt/websrv/config/nginx/certs.d -v /srv/websrv/logs/nginx:/opt/websrv/logs -v /srv/websrv/tmp:/opt/websrv/tmp seffeng/nginx
+$ docker run --name nginx-alias1 --network network-01 --network-alias nginx-net1 -d -p 80:80 -p 443:443 -v /opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /opt/websrv/config/nginx/conf.d:/opt/websrv/config/nginx/conf.d -v /opt/websrv/config/nginx/certs.d:/opt/websrv/config/nginx/certs.d -v /opt/websrv/logs/nginx:/opt/websrv/logs -v /opt/websrv/tmp:/opt/websrv/tmp seffeng/nginx
 ```

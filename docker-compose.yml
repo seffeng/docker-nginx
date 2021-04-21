@@ -12,11 +12,11 @@ services:
         aliases:
           - nginx-net1
     volumes:
-      - "/srv/websrv/data/wwwroot:/opt/websrv/data/wwwroot"
-      - "/srv/websrv/tmp:/opt/websrv/tmp"
-      - "/srv/websrv/logs/nginx:/opt/websrv/logs"
-      - "/srv/websrv/config/nginx/conf.d:/opt/websrv/config/nginx/conf.d"
-      - "/srv/websrv/config/nginx/certs.d:/opt/websrv/config/nginx/certs.d"
+      - "/opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot"
+      - "/opt/websrv/tmp:/opt/websrv/tmp"
+      - "/opt/websrv/logs/nginx:/opt/websrv/logs"
+      - "/opt/websrv/config/nginx/conf.d:/opt/websrv/config/nginx/conf.d"
+      - "/opt/websrv/config/nginx/certs.d:/opt/websrv/config/nginx/certs.d"
 
 networks:
   network-01:
