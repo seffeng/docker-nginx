@@ -14,9 +14,9 @@ ENV NGINX_VERSION=nginx-1.16.1\
 
 ENV PCRE_VERSION="pcre-${PCRE_VERSION_NUMBER}"
 
-ENV NGINX_URL="http://nginx.org/download/${NGINX_VERSION}.tar.gz"\
+ENV NGINX_URL="https://nginx.org/download/${NGINX_VERSION}.tar.gz"\
  PCRE_URL="https://udomain.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION_NUMBER}/${PCRE_VERSION}.tar.gz"\
- ZLIB_URL="http://zlib.net/${ZLIB_VERSION}.tar.gz"\
+ ZLIB_URL="https://zlib.net/${ZLIB_VERSION}.tar.gz"\
  CONFIGURE="./configure\
  --conf-path=${CONFIG_DIR}/nginx/nginx.conf\
  --error-log-path=${BASE_DIR}/logs/error.log\
