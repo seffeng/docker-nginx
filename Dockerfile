@@ -5,15 +5,17 @@ MAINTAINER  seffeng "seffeng@sina.cn"
 ARG BASE_DIR="/opt/websrv"
 
 ENV NGINX_VERSION=nginx-1.20.2\
- PCRE_VERSION="pcre-8.44"\
+ PCRE_VERSION_NUMBER="8.45"\
  ZLIB_VERSION="zlib-1.2.11"\
  CONFIG_DIR="${BASE_DIR}/config"\
  INSTALL_DIR=${BASE_DIR}/program/nginx\
  EXTEND="gcc g++ make bzip2 perl openssl-dev file"\
  WWWROOT_DIR="${BASE_DIR}/data/wwwroot"
 
+ENV PCRE_VERSION="pcre-${PCRE_VERSION_NUMBER}"
+
 ENV NGINX_URL="https://nginx.org/download/${NGINX_VERSION}.tar.gz"\
- PCRE_URL="https://ftp.pcre.org/pub/pcre/${PCRE_VERSION}.tar.gz"\
+ PCRE_URL="https://udomain.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION_NUMBER}/${PCRE_VERSION}.tar.gz"\
  ZLIB_URL="https://zlib.net/${ZLIB_VERSION}.tar.gz"\
  CONFIGURE="./configure\
  --user=www\
