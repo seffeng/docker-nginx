@@ -4,7 +4,7 @@ MAINTAINER  seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
 
-ENV NGINX_VERSION=nginx-1.20.2\
+ENV NGINX_VERSION=nginx-1.22.0\
  PCRE_VERSION_NUMBER="8.45"\
  ZLIB_VERSION="zlib-1.2.12"\
  CONFIG_DIR="${BASE_DIR}/config"\
