@@ -50,6 +50,12 @@ COPY    conf ./conf
 
 RUN \
  ############################################################
+ # apk add
+ ############################################################
+ apk update && apk add --no-cache ${BASE_PACKAGE} &&\
+ mkdir -p ${WWWROOT_DIR} ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/nginx/certs.d &&\
+ addgroup wwww && adduser -H -D -s /sbin/nologin -G wwww www &&\
+ ############################################################
  # download files
  ############################################################
  wget ${NGINX_URL} &&\
@@ -58,12 +64,6 @@ RUN \
  tar -zxf ${NGINX_VERSION}.tar.gz &&\
  tar -zxf ${PCRE_VERSION}.tar.gz &&\
  tar -zxf ${ZLIB_VERSION}.tar.gz &&\
- ############################################################
- # apk add
- ############################################################
- apk update && apk add --no-cache ${BASE_PACKAGE} &&\
- mkdir -p ${WWWROOT_DIR} ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/nginx/certs.d &&\
- addgroup wwww && adduser -H -D -s /sbin/nologin -G wwww www &&\
  ############################################################
  # install nginx
  ############################################################
