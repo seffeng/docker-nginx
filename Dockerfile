@@ -10,7 +10,7 @@ ARG ZLIB_VERSION="zlib-1.2.13"
 ENV PCRE_VERSION="pcre-${PCRE_VERSION_NUMBER}"\
  CONFIG_DIR="${BASE_DIR}/config"\
  INSTALL_DIR="${BASE_DIR}/program/nginx"\
- EXTEND="gcc g++ make bzip2 perl openssl-dev file"\
+ BASE_PACKAGE="gcc g++ make bzip2 perl openssl-dev file"\
  WWWROOT_DIR="${BASE_DIR}/data/wwwroot"
 
 ENV NGINX_URL="https://nginx.org/download/${NGINX_VERSION}.tar.gz"\
@@ -61,7 +61,7 @@ RUN \
  ############################################################
  # apk add
  ############################################################
- apk update && apk add --no-cache ${EXTEND} &&\
+ apk update && apk add --no-cache ${BASE_PACKAGE} &&\
  mkdir -p ${WWWROOT_DIR} ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/nginx/certs.d &&\
  addgroup wwww && adduser -H -D -s /sbin/nologin -G wwww www &&\
  ############################################################
@@ -73,7 +73,7 @@ RUN \
  ln -s ${INSTALL_DIR}/sbin/nginx /usr/bin/nginx &&\
  cp -Rf /tmp/conf/* ${CONFIG_DIR}/nginx &&\
  ############################################################
- apk del ${EXTEND} &&\
+ apk del ${BASE_PACKAGE} &&\
  rm -rf /var/cache/apk/* &&\
  rm -rf /tmp/*
 
