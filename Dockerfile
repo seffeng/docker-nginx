@@ -9,7 +9,7 @@ ARG ZLIB_VERSION="zlib-1.2.13"
 
 ENV PCRE_VERSION="pcre-${PCRE_VERSION_NUMBER}"\
  CONFIG_DIR="${BASE_DIR}/config"\
- INSTALL_DIR=${BASE_DIR}/program/nginx\
+ INSTALL_DIR="${BASE_DIR}/program/nginx"\
  BASE_PACKAGE="gcc g++ make bzip2 perl openssl-dev file"\
  WWWROOT_DIR="${BASE_DIR}/data/wwwroot"
 
