@@ -3,16 +3,15 @@ FROM    seffeng/alpine:latest
 MAINTAINER  seffeng "seffeng@sina.cn"
 
 ARG BASE_DIR="/opt/websrv"
+ARG NGINX_VERSION="nginx-1.22.0"
+ARG PCRE_VERSION_NUMBER="8.45"
+ARG ZLIB_VERSION="zlib-1.2.13"
 
-ENV NGINX_VERSION=nginx-1.22.0\
- PCRE_VERSION_NUMBER="8.45"\
- ZLIB_VERSION="zlib-1.2.12"\
+ENV PCRE_VERSION="pcre-${PCRE_VERSION_NUMBER}"\
  CONFIG_DIR="${BASE_DIR}/config"\
- INSTALL_DIR=${BASE_DIR}/program/nginx\
- EXTEND="gcc g++ make bzip2 perl openssl-dev file"\
+ INSTALL_DIR="${BASE_DIR}/program/nginx"\
+ BASE_PACKAGE="gcc g++ make bzip2 perl openssl-dev file"\
  WWWROOT_DIR="${BASE_DIR}/data/wwwroot"
-
-ENV PCRE_VERSION="pcre-${PCRE_VERSION_NUMBER}"
 
 ENV NGINX_URL="https://nginx.org/download/${NGINX_VERSION}.tar.gz"\
  PCRE_URL="https://udomain.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION_NUMBER}/${PCRE_VERSION}.tar.gz"\
@@ -49,25 +48,37 @@ ENV NGINX_URL="https://nginx.org/download/${NGINX_VERSION}.tar.gz"\
 WORKDIR /tmp
 COPY    conf ./conf
 
-RUN apk update && apk add ${EXTEND} &&\
+RUN \
+ ############################################################
+ # download files
+ ############################################################
  wget ${NGINX_URL} &&\
  wget ${PCRE_URL} &&\
  wget ${ZLIB_URL} &&\
  tar -zxf ${NGINX_VERSION}.tar.gz &&\
  tar -zxf ${PCRE_VERSION}.tar.gz &&\
  tar -zxf ${ZLIB_VERSION}.tar.gz &&\
+ ############################################################
+ # apk add
+ ############################################################
+ apk update && apk add --no-cache ${BASE_PACKAGE} &&\
  mkdir -p ${WWWROOT_DIR} ${BASE_DIR}/logs ${BASE_DIR}/tmp ${CONFIG_DIR}/nginx/certs.d &&\
  addgroup wwww && adduser -H -D -s /sbin/nologin -G wwww www &&\
- cd ${NGINX_VERSION} &&\
+ ############################################################
+ # install nginx
+ ############################################################
+ cd /tmp/${NGINX_VERSION} &&\
  ${CONFIGURE} &&\
  make && make install &&\
  ln -s ${INSTALL_DIR}/sbin/nginx /usr/bin/nginx &&\
  cp -Rf /tmp/conf/* ${CONFIG_DIR}/nginx &&\
- apk del ${EXTEND} &&\
+ ############################################################
+ apk del ${BASE_PACKAGE} &&\
  rm -rf /var/cache/apk/* &&\
  rm -rf /tmp/*
 
 VOLUME ["${CONFIG_DIR}/nginx/conf.d", "${CONFIG_DIR}/nginx/certs.d", "${BASE_DIR}/logs", "${WWWROOT_DIR}", "${BASE_DIR}/tmp"]
 
 EXPOSE 80 443
+
 CMD ["nginx", "-g", "daemon off;"]
