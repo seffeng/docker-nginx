@@ -35,9 +35,11 @@ ENV NGINX_URL="https://nginx.org/download/${NGINX_VERSION}.tar.gz"\
  --with-http_random_index_module\
  --with-http_realip_module\
  --with-http_secure_link_module\
+ --with-http_slice_module\
  --with-http_ssl_module\
  --with-http_stub_status_module\
  --with-http_sub_module\
+ --with-http_v2_module\
  --with-mail\
  --with-mail_ssl_module\
  --with-pcre=/tmp/${PCRE_VERSION}\
