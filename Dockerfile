@@ -40,6 +40,7 @@ ENV NGINX_URL="https://nginx.org/download/${NGINX_VERSION}.tar.gz"\
  --with-http_stub_status_module\
  --with-http_sub_module\
  --with-http_v2_module\
+ --with-ipv6\
  --with-mail\
  --with-mail_ssl_module\
  --with-pcre=/tmp/${PCRE_VERSION}\
