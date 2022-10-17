@@ -80,7 +80,7 @@ RUN \
  rm -rf /var/cache/apk/* &&\
  rm -rf /tmp/*
 
-VOLUME ["${CONFIG_DIR}/nginx/conf.d", "${CONFIG_DIR}/nginx/certs.d", "${BASE_DIR}/logs", "${WWWROOT_DIR}", "${BASE_DIR}/tmp"]
+VOLUME ["${BASE_DIR}/logs"]
 
 EXPOSE 80 443
 
