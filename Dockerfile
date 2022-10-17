@@ -1,6 +1,6 @@
 FROM seffeng/alpine:latest
 
-LABEL author="seffeng <seffeng@live.com>"
+LABEL author="zxf <seffeng@live.com>"
 
 ARG BASE_DIR="/opt/websrv"
 ARG NGINX_VERSION="nginx-1.18.0"
