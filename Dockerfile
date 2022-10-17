@@ -1,6 +1,6 @@
-FROM    seffeng/alpine:latest
+FROM seffeng/alpine:latest
 
-MAINTAINER  seffeng "seffeng@sina.cn"
+LABEL author="seffeng <seffeng@live.com>"
 
 ARG BASE_DIR="/opt/websrv"
 ARG NGINX_VERSION="nginx-1.16.1"
