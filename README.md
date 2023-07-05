@@ -2,10 +2,11 @@
 
 # 版本
 
-* [1.22.1 , latest](https://github.com/seffeng/docker-nginx/tree/1.22)
-* [1.20.2](https://github.com/seffeng/docker-nginx/tree/1.20)
-* [1.18.0](https://github.com/seffeng/docker-nginx/tree/1.18)
-* [1.16.1](https://github.com/seffeng/docker-nginx/tree/1.16)
+* [1.24 , 1.24.0 , latest](https://github.com/seffeng/docker-nginx/tree/1.24)
+* [1.22 , 1.22.1](https://github.com/seffeng/docker-nginx/tree/1.22)
+* [1.20 , 1.20.2](https://github.com/seffeng/docker-nginx/tree/1.20)
+* [1.18 , 1.18.0](https://github.com/seffeng/docker-nginx/tree/1.18)
+* [1.16 , 1.16.1](https://github.com/seffeng/docker-nginx/tree/1.16)
 
 ## 常用命令：
 
