@@ -3,7 +3,7 @@ FROM seffeng/alpine:3.17
 LABEL author="zxf <seffeng@live.com>"
 
 ARG BASE_DIR="/opt/websrv"
-ARG NGINX_VERSION="nginx-1.22.1"
+ARG NGINX_VERSION="nginx-1.24.0"
 ARG PCRE_VERSION_NUMBER="8.45"
 ARG ZLIB_VERSION="zlib-1.2.13"
 
