@@ -1,11 +1,11 @@
-FROM seffeng/alpine:3.18
+FROM seffeng/alpine:3.19
 
 LABEL author="zxf <seffeng@live.com>"
 
 ARG BASE_DIR="/opt/websrv"
-ARG NGINX_VERSION="nginx-1.24.0"
+ARG NGINX_VERSION="nginx-1.26.1"
 ARG PCRE_VERSION_NUMBER="8.45"
-ARG ZLIB_VERSION="zlib-1.2.13"
+ARG ZLIB_VERSION="zlib-1.3.1"
 
 ENV PCRE_VERSION="pcre-${PCRE_VERSION_NUMBER}"\
  CONFIG_DIR="${BASE_DIR}/config"\
@@ -15,7 +15,7 @@ ENV PCRE_VERSION="pcre-${PCRE_VERSION_NUMBER}"\
 
 ENV NGINX_URL="https://nginx.org/download/${NGINX_VERSION}.tar.gz"\
  PCRE_URL="https://udomain.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION_NUMBER}/${PCRE_VERSION}.tar.gz"\
- ZLIB_URL="https://zlib.net/${ZLIB_VERSION}.tar.gz"\
+ ZLIB_URL="https://www.zlib.net/${ZLIB_VERSION}.tar.gz"\
  CONFIGURE="./configure\
  --user=www\
  --group=wwww\

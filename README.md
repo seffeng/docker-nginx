@@ -2,7 +2,7 @@
 
 # 版本
 
-* [1.24 , 1.24.0](https://github.com/seffeng/docker-nginx/tree/1.24)
+* [1.26 , 1.26.1](https://github.com/seffeng/docker-nginx/tree/1.26)
 
 ## 常用命令：
 
