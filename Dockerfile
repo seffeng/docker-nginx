@@ -14,7 +14,7 @@ ENV PCRE_VERSION="pcre-${PCRE_VERSION_NUMBER}"\
  WWWROOT_DIR="${BASE_DIR}/data/wwwroot"
 
 ENV NGINX_URL="https://nginx.org/download/${NGINX_VERSION}.tar.gz"\
- PCRE_URL="https://udomain.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION_NUMBER}/${PCRE_VERSION}.tar.gz"\
+ PCRE_URL="https://zenlayer.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION_NUMBER}/${PCRE_VERSION}.tar.gz?viasf=1"\
  ZLIB_URL="https://www.zlib.net/${ZLIB_VERSION}.tar.gz"\
  CONFIGURE="./configure\
  --user=www\
