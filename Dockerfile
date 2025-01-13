@@ -61,7 +61,7 @@ RUN \
  # download files
  ############################################################
  wget ${NGINX_URL} &&\
- wget ${PCRE_URL} &&\
+ wget -O ${PCRE_VERSION}.tar.gz ${PCRE_URL} &&\
  wget ${ZLIB_URL} &&\
  tar -zxf ${NGINX_VERSION}.tar.gz &&\
  tar -zxf ${PCRE_VERSION}.tar.gz &&\
