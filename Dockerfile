@@ -1,9 +1,9 @@
-FROM seffeng/alpine:3.22
+FROM seffeng/alpine:3.23
 
 LABEL author="zxf <seffeng@live.com>"
 
 ARG BASE_DIR="/opt/websrv"
-ARG NGINX_VERSION="nginx-1.28.0"
+ARG NGINX_VERSION="nginx-1.28.1"
 ARG PCRE_VERSION_NUMBER="8.45"
 ARG ZLIB_VERSION="zlib-1.3.1"
 

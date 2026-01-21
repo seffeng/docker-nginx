@@ -58,3 +58,37 @@ $ docker network create network-01
 ## 运行容器增加 --network network-01 --network-alias [name-net-alias]
 $ docker run --name nginx-alias1 --network network-01 --network-alias nginx-net1 -d -p 80:80 -p 443:443 -v /opt/websrv/data/wwwroot:/opt/websrv/data/wwwroot -v /opt/websrv/config/nginx/conf.d:/opt/websrv/config/nginx/conf.d -v /opt/websrv/config/nginx/certs.d:/opt/websrv/config/nginx/certs.d -v /opt/websrv/logs/nginx:/opt/websrv/logs -v /opt/websrv/tmp:/opt/websrv/tmp seffeng/nginx
 ```
+
+```ini
+# 配置说明（nginx.conf）
+upstream unix_php_fpm_default {
+    # ip_hash;
+    server unix:///opt/websrv/tmp/php-fpm_1.sock weight=6 max_fails=2 fail_timeout=30s;
+    server unix:///opt/websrv/tmp/php-fpm_2.sock weight=3 max_fails=2 fail_timeout=30s;
+    server unix:///opt/websrv/tmp/php-fpm_3.sock backup;
+    # keepalive 32;
+}
+## ip_hash：需要会话保持（如登录态）
+## server：定义后端服务器地址（支持 IP:端口、域名、Unix socket）,避免使用 localhost
+## weight：权重值，必须为整数，影响请求分配比例（默认为 1）
+## max_fails：失败尝试次数，超过则标记为不可用
+## fail_timeout：失败后等待时间，期间不转发请求
+## backup：仅当所有非备份服务器都不可用时才启用
+## keepalive：保持与后端的长连接，减少连接开销
+
+# server 配置（conf.d/_http.conf）
+server {
+    # ...
+
+    location     ~ .*\.(php|PHP)?$ {
+        fastcgi_pass    unix_php_fpm_default;
+        fastcgi_index   index.php;
+        fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include         fastcgi_params;
+        fastcgi_intercept_errors    on;
+    }
+    
+    # ...
+}
+```
+
