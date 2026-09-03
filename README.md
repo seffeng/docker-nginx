@@ -2,8 +2,8 @@
 
 # 版本
 
-* [1.30 , 1.30.0](https://github.com/seffeng/docker-nginx/tree/1.30)
-* [1.28 , 1.28.3 , latest](https://github.com/seffeng/docker-nginx/tree/1.28)
+* [1.30 , 1.30.4 , latest](https://github.com/seffeng/docker-nginx/tree/1.30)
+* [1.28 , 1.28.3](https://github.com/seffeng/docker-nginx/tree/1.28)
 * [1.26 , 1.26.3](https://github.com/seffeng/docker-nginx/tree/1.26)
 * [1.24 , 1.24.0](https://github.com/seffeng/docker-nginx/tree/1.24)
 * [1.22 , 1.22.1](https://github.com/seffeng/docker-nginx/tree/1.22)
